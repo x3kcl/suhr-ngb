@@ -1,9 +1,9 @@
 language: node_js
-
 before_install:
 - sudo apt-get -y install openssh-client
 - git clone https://github.com/x3kcl/suhr-ngb.git
-- openssl aes-256-cbc -K $encrypted_edc15e6e3ccc_key -iv $encrypted_edc15e6e3ccc_iv -in deploy_rsa.enc -out deploy_rsa -d
+- openssl aes-256-cbc -K $encrypted_267e7981dd86_key -iv $encrypted_267e7981dd86_iv
+  -in deploy_rsa.enc -out deploy_rsa -d
 - eval "$(ssh-agent -s)"
 - chmod 600 deploy_rsa
 - echo -e "Host $SERVER_IP_ADDRESS\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
@@ -23,18 +23,17 @@ script:
 - cp .htaccess dist/suhr-ngb/
 - cp install.sh dist/suhr-ngb/
 - tar cjvf www.tar.bz dist/suhr-ngb
-
 deploy:
-  - provider: script
-    skip_cleanup: true
-    script: scp $TRAVIS_BUILD_DIR/www.tar.bz root@naumann.hosting:/root/ 
-    on:
-      branch: master
-  - provider: script
-    skip_cleanup: true
-    script: ssh -i deploy_rsa root@naumann.hosting tar xjvf /root/www.tar.bz &&
-              ssh -i deploy_rsa root@naumann.hosting mv /root/www/install.sh /root/ &&
-              ssh -i deploy_rsa root@naumann.hosting chmod +x /root/install.sh &&
-              ssh -i deploy_rsa root@naumann.hosting /root/install.sh
-    on:
-      branch: master
+- provider: script
+  skip_cleanup: true
+  script: scp $TRAVIS_BUILD_DIR/www.tar.bz root@naumann.hosting:/root/
+  on:
+    branch: master
+- provider: script
+  skip_cleanup: true
+  script: ssh -i deploy_rsa root@naumann.hosting tar xjvf /root/www.tar.bz && ssh
+    -i deploy_rsa root@naumann.hosting mv /root/www/install.sh /root/ && ssh -i deploy_rsa
+    root@naumann.hosting chmod +x /root/install.sh && ssh -i deploy_rsa root@naumann.hosting
+    /root/install.sh
+  on:
+    branch: master
