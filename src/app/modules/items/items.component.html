@@ -1,0 +1,7 @@
+<h3>{{title}}</h3>
+
+<ul class="list-group">
+    <li class="list-group-item" *ngFor="let item of Items">
+        <a [href]="item.url">{{item.title}}</a>
+    </li>
+  </ul>

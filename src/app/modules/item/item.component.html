@@ -1,0 +1,16 @@
+<h3>{{title}}</h3>
+
+<ul class="nav flex-column">
+    <li class="nav-item" *ngFor="let category of Categories">
+      <h5>{{category.title}}</h5>
+      <ul class="nav flex-column">
+        <li class="nav-item" *ngFor="let subtitle of category.subtitleList">
+          <a class="nav-link active" (click)="openDetailsWithState(subtitle.item)">{{subtitle.title}}</a>
+          <span class="badge badge-secondary">{{subtitle.status}}</span>
+        </li>
+      </ul>
+    </li>
+</ul>
+
+  
+  

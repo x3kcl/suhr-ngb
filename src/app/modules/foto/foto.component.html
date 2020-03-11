@@ -1,0 +1,14 @@
+<h3>{{title}}</h3>
+
+<div class="container">
+    <div class="row">
+        <div class="col" *ngFor="let foto of Fotos">
+            <div class="card" style="width: 18rem;">
+                <img [src]="foto.full_url" class="card-img-top" [alt]="foto.title">
+                <div class="card-body">
+                    <p class="card-text" [innerHTML]="foto.title"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
