@@ -1,8 +1,8 @@
 #!/bin/bash
 echo "Deployment START"
-chown cloud.cloud -R /root/www
+chown cloud.cloud -R /root/dist/suhr-ngb
 echo "move www"
-mv /root/www /home/cloud/docker/
+mv /root/dist/suhr-ngb /home/cloud/docker/www
 echo "Stop docker"
 su -c "docker-compose -f /home/cloud/docker/docker-compose.yml stop" cloud &
 BACK_PID=$!
