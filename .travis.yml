@@ -3,8 +3,7 @@ language: node_js
 before_install:
 - sudo apt-get -y install openssh-client
 - git clone https://github.com/x3kcl/suhr-ngb.git
-- openssl aes-256-cbc -K $encrypted_edc15e6e3ccc_key -iv $encrypted_edc15e6e3ccc_iv
-  -in deploy_rsa.enc -out deploy_rsa -d
+- openssl aes-256-cbc -K $encrypted_edc15e6e3ccc_key -iv $encrypted_edc15e6e3ccc_iv -in deploy_rsa.enc -out deploy_rsa -d
 - eval "$(ssh-agent -s)"
 - chmod 600 deploy_rsa
 - echo -e "Host $SERVER_IP_ADDRESS\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
