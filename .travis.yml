@@ -11,7 +11,7 @@ before_install:
 - ssh-add deploy_rsa
 - ssh -i deploy_rsa root@naumann.hosting pwd
 - nvm install --lts
-- npm install -g @ionic/cli
+- npm install -g @angular/cli
 addons:
   apt:
     update: true
@@ -20,10 +20,10 @@ before_script:
 - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost
   &
 script:
-- ionic build --prod --engine=browser --watch=false --release
-- cp .htaccess www/
-- cp install.sh www/
-- tar cjvf www.tar.bz www
+- ng build --prod --watch=false
+- cp .htaccess dist/suhr-ngb/
+- cp install.sh dist/suhr-ngb/
+- tar cjvf www.tar.bz dist/suhr-ngb
 
 deploy:
   - provider: script
